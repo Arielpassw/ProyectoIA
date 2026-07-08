@@ -1,20 +1,31 @@
+"""
+Entrenamiento del modelo CNN para Fashion MNIST.
+"""
+
+import time
+
 import tensorflow as tf
 from tensorflow.keras import layers, models, optimizers
 from tensorflow.keras.datasets import fashion_mnist
 
-from config import (
+from backend.config import (
     MODEL_PATH,
+    TrainConfig,
     DEFAULT_CONFIG,
+    IMAGE_WIDTH,
+    IMAGE_HEIGHT,
+    IMAGE_CHANNELS,
+    NUM_CLASSES
 )
 
-from utils import save_history
+from backend.utils import save_history
 
 
-# Cargar Dataset
+# DATASET
 
 def load_dataset():
     """
-    Descarga automáticamente Fashion MNIST.
+    Descarga automáticamente el dataset Fashion MNIST.
     """
 
     (x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
@@ -22,7 +33,7 @@ def load_dataset():
     return (x_train, y_train), (x_test, y_test)
 
 
-# Preprocesamiento
+# PREPROCESAMIENTO
 
 def preprocess_data(x_train, x_test):
     """
@@ -32,35 +43,51 @@ def preprocess_data(x_train, x_test):
     x_train = x_train.astype("float32") / 255.0
     x_test = x_test.astype("float32") / 255.0
 
-    x_train = x_train[..., tf.newaxis]
-    x_test = x_test[..., tf.newaxis]
+    x_train = x_train.reshape(
+        -1,
+        IMAGE_WIDTH,
+        IMAGE_HEIGHT,
+        IMAGE_CHANNELS
+    )
+
+    x_test = x_test.reshape(
+        -1,
+        IMAGE_WIDTH,
+        IMAGE_HEIGHT,
+        IMAGE_CHANNELS
+    )
 
     return x_train, x_test
 
+# MODELO CNN
 
-# Construcción del Modelo
-
-def build_model(config):
+def build_model(config: TrainConfig):
 
     model = models.Sequential([
 
-        layers.Input(shape=(28, 28, 1)),
+        layers.Input(
+            shape=(
+                IMAGE_WIDTH,
+                IMAGE_HEIGHT,
+                IMAGE_CHANNELS
+            )
+        ),
 
         layers.Conv2D(
             filters=32,
-            kernel_size=(3,3),
+            kernel_size=(3, 3),
             activation="relu"
         ),
 
-        layers.MaxPooling2D((2,2)),
+        layers.MaxPooling2D((2, 2)),
 
         layers.Conv2D(
             filters=64,
-            kernel_size=(3,3),
+            kernel_size=(3, 3),
             activation="relu"
         ),
 
-        layers.MaxPooling2D((2,2)),
+        layers.MaxPooling2D((2, 2)),
 
         layers.Flatten(),
 
@@ -69,20 +96,27 @@ def build_model(config):
             activation="relu"
         ),
 
-        layers.Dropout(
-            config["dropout"]
-        ),
+        layers.Dropout(config.dropout),
 
         layers.Dense(
-            10,
+            NUM_CLASSES,
             activation="softmax"
         )
 
     ])
 
-    optimizer = optimizers.Adam(
-        learning_rate=config["learning_rate"]
-    )
+    # Elegimos el optimizador
+    if config.optimizer.lower() == "adam":
+
+        optimizer = optimizers.Adam(
+            learning_rate=config.learning_rate
+        )
+
+    else:
+
+        optimizer = optimizers.SGD(
+            learning_rate=config.learning_rate
+        )
 
     model.compile(
 
@@ -97,16 +131,21 @@ def build_model(config):
     return model
 
 
-# Entrenamiento
+# ENTRENAMIENTO
 
-def train_model(config=None):
+def train_model(config: TrainConfig | None = None):
 
     if config is None:
         config = DEFAULT_CONFIG
 
+    start_time = time.time()
+
     (x_train, y_train), (x_test, y_test) = load_dataset()
 
-    x_train, x_test = preprocess_data(x_train, x_test)
+    x_train, x_test = preprocess_data(
+        x_train,
+        x_test
+    )
 
     model = build_model(config)
 
@@ -118,15 +157,24 @@ def train_model(config=None):
 
         validation_data=(x_test, y_test),
 
-        epochs=config["epochs"],
+        epochs=config.epochs,
 
-        batch_size=config["batch_size"],
+        batch_size=config.batch_size,
 
         verbose=1
 
     )
 
+    MODEL_PATH.parent.mkdir(
+        parents=True,
+        exist_ok=True
+    )
+
     model.save(MODEL_PATH)
+
+    from backend import predict
+
+    predict._model = None  # Reiniciamos el modelo cargado en memoria
 
     history_data = {
 
@@ -136,29 +184,58 @@ def train_model(config=None):
 
         "loss": history.history["loss"],
 
-        "val_loss": history.history["val_loss"]
+        "val_loss": history.history["val_loss"],
+
+        "config": config.model_dump()
 
     }
 
     save_history(history_data)
 
+    training_time = round(
+        time.time() - start_time,
+        2
+    )
+
     return {
 
         "success": True,
 
-        "accuracy": history_data["accuracy"][-1],
+        "message": "Modelo entrenado correctamente.",
 
-        "val_accuracy": history_data["val_accuracy"][-1],
+        "model": str(MODEL_PATH),
 
-        "loss": history_data["loss"][-1],
+        "training_time": training_time,
 
-        "val_loss": history_data["val_loss"][-1]
+        "epochs": config.epochs,
+
+        "accuracy": round(
+            history.history["accuracy"][-1],
+            4
+        ),
+
+        "val_accuracy": round(
+            history.history["val_accuracy"][-1],
+            4
+        ),
+
+        "loss": round(
+            history.history["loss"][-1],
+            4
+        ),
+
+        "val_loss": round(
+            history.history["val_loss"][-1],
+            4
+        )
 
     }
 
 
+# EJECUCIÓN DIRECTA
+
 if __name__ == "__main__":
 
-    result = train_model()
+    resultado = train_model()
 
-    print(result)
+    print(resultado)

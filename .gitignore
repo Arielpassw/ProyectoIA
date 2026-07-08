@@ -1,0 +1,19 @@
+# Entorno virtual
+venv/
+
+# Python
+__pycache__/
+*.pyc
+
+# TensorFlow
+*.h5
+
+# Modelo entrenado
+backend/model.keras
+
+# VS Code
+.vscode/
+
+# Sistema
+.DS_Store
+Thumbs.db

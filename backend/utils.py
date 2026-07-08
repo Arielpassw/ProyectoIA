@@ -1,23 +1,36 @@
+"""
+Funciones auxiliares del proyecto.
+"""
+
 import json
+from datetime import datetime
 from pathlib import Path
 
-from config import HISTORY_PATH
+from backend.config import (
+    HISTORY_PATH,
+    LABELS_PATH,
+    MODEL_PATH
+)
 
+
+# HISTORIAL
 
 def save_history(history: dict):
     """
-    Guarda el historial de entrenamiento en formato JSON.
+    Guarda las métricas del entrenamiento.
     """
 
     HISTORY_PATH.parent.mkdir(parents=True, exist_ok=True)
 
+    history["date"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
     with open(HISTORY_PATH, "w", encoding="utf-8") as file:
-        json.dump(history, file, indent=4)
+        json.dump(history, file, indent=4, ensure_ascii=False)
 
 
 def load_history():
     """
-    Devuelve el historial de entrenamiento.
+    Carga el historial del entrenamiento.
     """
 
     if not HISTORY_PATH.exists():
@@ -27,8 +40,22 @@ def load_history():
         return json.load(file)
 
 
-def model_exists(model_path: Path):
+# MODELO
+
+def model_exists() -> bool:
     """
     Verifica si existe el modelo entrenado.
     """
-    return model_path.exists()
+
+    return MODEL_PATH.exists()
+
+
+# ETIQUETAS
+
+def load_labels():
+    """
+    Carga las etiquetas del dataset.
+    """
+
+    with open(LABELS_PATH, "r", encoding="utf-8") as file:
+        return json.load(file)

@@ -1,74 +1,77 @@
 """
-predict.py
-Realiza predicciones utilizando el modelo entrenado.
+Predicción de imágenes utilizando el modelo entrenado.
 """
 
-import json
+from pathlib import Path
 
 import numpy as np
 import tensorflow as tf
-
 from PIL import Image
 
-from config import (
+from backend.config import (
     MODEL_PATH,
-    LABELS_PATH,
-    IMAGE_SIZE
+    IMAGE_WIDTH,
+    IMAGE_HEIGHT
 )
 
+from backend.utils import load_labels, model_exists
 
-# Cargar modelo
+# CARGA DEL MODELO
 
 _model = None
 
 
 def load_model():
     """
-    Carga el modelo entrenado una sola vez.
+    Carga el modelo entrenado una única vez.
     """
 
     global _model
 
     if _model is None:
 
+        if not model_exists():
+            raise FileNotFoundError(
+                "No existe un modelo entrenado."
+            )
+
         _model = tf.keras.models.load_model(MODEL_PATH)
 
     return _model
 
 
-# Cargar etiquetas
+# PREPROCESAMIENTO
 
-def load_labels():
-
-    with open(LABELS_PATH, "r", encoding="utf-8") as file:
-
-        return json.load(file)
-
-
-# Preprocesar imagen
-
-def preprocess_image(image_path):
+def preprocess_image(image_path: Path):
 
     image = Image.open(image_path)
 
     image = image.convert("L")
 
-    image = image.resize(IMAGE_SIZE)
+    image = image.resize(
+        (
+            IMAGE_WIDTH,
+            IMAGE_HEIGHT
+        )
+    )
 
     image = np.array(image)
 
     image = image.astype("float32") / 255.0
 
-    image = np.expand_dims(image, axis=-1)
-
-    image = np.expand_dims(image, axis=0)
+    image = image.reshape(
+        1,
+        IMAGE_WIDTH,
+        IMAGE_HEIGHT,
+        1
+    )
 
     return image
 
 
-# Predicción
+# PREDICCIÓN
 
-def predict_image(image_path):
+def predict_image(image_path: Path):
 
     model = load_model()
 
@@ -76,21 +79,27 @@ def predict_image(image_path):
 
     image = preprocess_image(image_path)
 
-    predictions = model.predict(image, verbose=0)
+    predictions = model.predict(
+        image,
+        verbose=0
+    )[0]
 
-    probabilities = predictions[0]
-
-    predicted_index = int(np.argmax(probabilities))
+    predicted_index = int(np.argmax(predictions))
 
     predicted_label = labels[str(predicted_index)]
 
-    confidence = float(probabilities[predicted_index] * 100)
+    confidence = round(
+        float(predictions[predicted_index] * 100),
+        2
+    )
 
-    probabilities_dict = {}
+    probabilities = {}
 
-    for i, probability in enumerate(probabilities):
+    for index, probability in enumerate(predictions):
 
-        probabilities_dict[labels[str(i)]] = round(
+        probabilities[
+            labels[str(index)]
+        ] = round(
             float(probability * 100),
             2
         )
@@ -101,8 +110,8 @@ def predict_image(image_path):
 
         "prediction": predicted_label,
 
-        "confidence": round(confidence, 2),
+        "confidence": confidence,
 
-        "probabilities": probabilities_dict
+        "probabilities": probabilities
 
     }
