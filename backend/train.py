@@ -62,6 +62,12 @@ def preprocess_data(x_train, x_test):
 # MODELO CNN
 
 def build_model(config: TrainConfig):
+    """Construye y compila una CNN usando la configuración recibida.
+
+    La arquitectura permanece fija para que los experimentos comparen los
+    hiperparámetros expuestos en la interfaz: optimizador, learning rate y
+    dropout. La capa softmax devuelve una probabilidad para cada clase.
+    """
 
     model = models.Sequential([
 
@@ -134,6 +140,21 @@ def build_model(config: TrainConfig):
 # ENTRENAMIENTO
 
 def train_model(config: TrainConfig | None = None):
+    """Ejecuta el ciclo completo de entrenamiento y persiste sus resultados.
+
+    Si no se proporciona una configuración, utiliza los valores por defecto.
+    La función carga y prepara Fashion-MNIST, crea un modelo nuevo, lo entrena,
+    guarda ``model.keras`` y registra las métricas por época en JSON. Al final
+    invalida la caché de predicción para que la próxima inferencia cargue el
+    modelo recién generado.
+
+    Args:
+        config: Hiperparámetros validados por ``TrainConfig``.
+
+    Returns:
+        Un diccionario serializable con las métricas finales, el tiempo de
+        entrenamiento y la ubicación del modelo guardado.
+    """
 
     if config is None:
         config = DEFAULT_CONFIG
