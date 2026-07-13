@@ -6,11 +6,11 @@
 
 **Sistema:** Clasificador de prendas con inteligencia artificial  
 **Asignatura:** Fundamentos de Inteligencia Artificial  
-**Estudiante(s):** _Completar_  
-**Docente:** _Completar_  
-**Institución:** _Completar_  
-**Periodo académico:** _Completar_  
-**Fecha de entrega:** _Completar_
+**Estudiante(s):** _Arias Ariel, Pazmiño Emily, Tana Emilia_  
+**Docente:** _Román Miltón_  
+**Institución:** _Escuela Politécnca Nacional_  
+**Periodo académico:** _2026A_  
+**Fecha de entrega:** _20 de julio del 2026_
 
 ---
 
@@ -119,7 +119,7 @@ Para predecir, el usuario carga un archivo. La API lo almacena en `images/`, lo 
 
 ## 10. Resultados
 
-La última ejecución registrada el 7 de julio de 2026 utilizó 10 épocas, batch size 32, learning rate 0.001, Adam y dropout 0.30.
+La última ejecución registrada utilizó 10 épocas, batch size 32, learning rate 0.001, Adam y dropout 0.30.
 
 | Métrica final | Valor |
 |---|---:|
@@ -186,5 +186,5 @@ El procedimiento para actualizar las evidencias se encuentra en [capturas/README
 - Fashion-MNIST, creado por Zalando Research.
 - Documentación de Pydantic, Pillow y Chart.js.
 
-> Antes de entregar, complete los datos de portada y adapte el formato de referencias al estilo solicitado por la institución.
+
 

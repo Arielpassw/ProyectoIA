@@ -101,7 +101,6 @@ Permite seleccionar una imagen, observar su vista previa, ejecutar la predicció
 
 **Figura 1.** Interfaz principal con los paneles de configuración, resultados y predicción. La evidencia se genera desde el código real de `frontend/`.
 
-> Si la captura indica que no hay conexión, significa que documenta la interfaz sin una API activa. Para una evidencia final con métricas cargadas, instale las dependencias, ejecute backend y frontend y siga [capturas/README.md](capturas/README.md).
 
 ## 8. Reglas de negocio
 
@@ -139,7 +138,7 @@ Permite seleccionar una imagen, observar su vista previa, ejecutar la predicció
 
 ## 11. Criterios de aceptación
 
-- La interfaz abre sin errores estructurales y se adapta a móvil.
+- La interfaz abre sin errores estructurales.
 - `/health` devuelve estado OK.
 - La configuración válida se conserva durante la ejecución del servidor.
 - El entrenamiento produce modelo e historial.
