@@ -7,7 +7,7 @@
 **Sistema:** Clasificador de prendas con inteligencia artificial  
 **Asignatura:** Fundamentos de Inteligencia Artificial  
 **Estudiante(s):** _Arias Ariel, Pazmiño Emily, Tana Emilia_  
-**Docente:** _Román Miltón_  
+**Docente:** _Milton Román_  
 **Institución:** _Escuela Politécnca Nacional_  
 **Periodo académico:** _2026A_  
 **Fecha de entrega:** _20 de julio del 2026_
