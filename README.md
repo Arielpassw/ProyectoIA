@@ -83,11 +83,7 @@ La primera ejecución descarga Fashion-MNIST. El entrenamiento genera `backend/m
 
 ## Documentación
 
-- [Informe final](docs/INFORME_FINAL.md)
-- [Manual técnico](docs/MANUAL_TECNICO.md)
-- [Documentación del sistema](docs/DOCUMENTACION_SISTEMA.md)
-- [Referencia de la API](docs/API.md)
-- [Guía para desarrolladores](docs/GUIA_DESARROLLADORES.md)
+-
 - [Índice de capturas](docs/capturas/README.md)
 
 ### Versiones editables en Word
