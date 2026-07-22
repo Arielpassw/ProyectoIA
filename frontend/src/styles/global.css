@@ -1,0 +1,80 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+:root {
+  font-family: "Inter", sans-serif;
+  color: #111827;
+  background: #f8f9ff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  --background: #f8f9ff;
+  --surface: #ffffff;
+  --surface-secondary: #f5f6ff;
+  --text-primary: #111827;
+  --text-secondary: #667085;
+  --border: #e3e6ef;
+  --primary: #5b3df5;
+  --primary-secondary: #4169ff;
+  --primary-soft: #efedff;
+  --success: #209653;
+  --success-soft: #e9f8ef;
+  --danger: #d92d20;
+  --danger-soft: #fff0ee;
+  --shadow: 0 16px 45px rgba(67, 56, 202, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.app {
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--text-primary);
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.dark-theme {
+  --background: #10111a;
+  --surface: #171925;
+  --surface-secondary: #202231;
+  --text-primary: #f8fafc;
+  --text-secondary: #aeb5c5;
+  --border: #2d3042;
+  --primary-soft: #2a244f;
+  --success-soft: #173c2b;
+  --danger-soft: #3f2022;
+  --shadow: 0 16px 45px rgba(0, 0, 0, 0.26);
+}

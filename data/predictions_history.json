@@ -1,0 +1,200 @@
+[
+    {
+        "id": "5826822653c645c182de751a2433bf75",
+        "date": "2026-07-21T20:13:05.396893",
+        "original_filename": "pantalon_1.png",
+        "prediction": {
+            "label": "Pantalón",
+            "confidence": 100.0,
+            "confidence_level": "Alta"
+        },
+        "dominant_color": {
+            "name": "Negro",
+            "percentage": 77.04,
+            "hex": "#141414"
+        },
+        "alternatives": [
+            {
+                "label": "Camiseta",
+                "probability": 0.0
+            },
+            {
+                "label": "Suéter",
+                "probability": 0.0
+            },
+            {
+                "label": "Vestido",
+                "probability": 0.0
+            },
+            {
+                "label": "Abrigo",
+                "probability": 0.0
+            }
+        ]
+    },
+    {
+        "id": "f5fd673df3fe41a2b6bfcdb597955001",
+        "date": "2026-07-21T19:02:06.648649",
+        "original_filename": "ChatGPT Image 21 jul 2026, 07_01_01 p.m..png",
+        "prediction": {
+            "label": "Bolso",
+            "confidence": 68.9,
+            "confidence_level": "Media"
+        },
+        "dominant_color": {
+            "name": "Negro",
+            "percentage": 65.28,
+            "hex": "#141414"
+        },
+        "alternatives": [
+            {
+                "label": "Camiseta",
+                "probability": 24.7
+            },
+            {
+                "label": "Suéter",
+                "probability": 4.68
+            },
+            {
+                "label": "Camisa",
+                "probability": 1.09
+            },
+            {
+                "label": "Pantalón",
+                "probability": 0.33
+            }
+        ]
+    },
+    {
+        "id": "292f8ace35504e4fbb69aae9ae225199",
+        "date": "2026-07-21T19:01:49.338624",
+        "original_filename": "ChatGPT Image 21 jul 2026, 07_01_01 p.m..png",
+        "prediction": {
+            "label": "Bolso",
+            "confidence": 68.9,
+            "confidence_level": "Media"
+        },
+        "dominant_color": {
+            "name": "Negro",
+            "percentage": 65.28,
+            "hex": "#141414"
+        },
+        "alternatives": [
+            {
+                "label": "Camiseta",
+                "probability": 24.7
+            },
+            {
+                "label": "Suéter",
+                "probability": 4.68
+            },
+            {
+                "label": "Camisa",
+                "probability": 1.09
+            },
+            {
+                "label": "Pantalón",
+                "probability": 0.33
+            }
+        ]
+    },
+    {
+        "id": "c0f4c294afaa47478512715fec1bb523",
+        "date": "2026-07-21T18:54:51.283877",
+        "original_filename": "camiseta_4.png",
+        "prediction": {
+            "label": "Camiseta",
+            "confidence": 99.62,
+            "confidence_level": "Alta"
+        },
+        "dominant_color": {
+            "name": "Negro",
+            "percentage": 89.77,
+            "hex": "#141414"
+        },
+        "alternatives": [
+            {
+                "label": "Camisa",
+                "probability": 0.37
+            },
+            {
+                "label": "Suéter",
+                "probability": 0.01
+            },
+            {
+                "label": "Pantalón",
+                "probability": 0.0
+            },
+            {
+                "label": "Vestido",
+                "probability": 0.0
+            }
+        ]
+    },
+    {
+        "id": "8199dc10d7024168bda62b1a8d158fbb",
+        "date": "2026-07-21T18:54:39.847850",
+        "original_filename": "abrigo_4.png",
+        "prediction": {
+            "label": "Abrigo",
+            "confidence": 71.33,
+            "confidence_level": "Media"
+        },
+        "dominant_color": {
+            "name": "Negro",
+            "percentage": 48.93,
+            "hex": "#141414"
+        },
+        "alternatives": [
+            {
+                "label": "Suéter",
+                "probability": 14.94
+            },
+            {
+                "label": "Camisa",
+                "probability": 12.93
+            },
+            {
+                "label": "Bolso",
+                "probability": 0.6
+            },
+            {
+                "label": "Camiseta",
+                "probability": 0.08
+            }
+        ]
+    },
+    {
+        "id": "a4b0c5be8bbb487da92527425f632a5d",
+        "date": "2026-07-21T18:53:27.547319",
+        "original_filename": "sandalia.jpg",
+        "prediction": {
+            "label": "Camiseta",
+            "confidence": 98.97,
+            "confidence_level": "Alta"
+        },
+        "dominant_color": {
+            "name": "Negro",
+            "percentage": 63.56,
+            "hex": "#141414"
+        },
+        "alternatives": [
+            {
+                "label": "Camisa",
+                "probability": 0.51
+            },
+            {
+                "label": "Suéter",
+                "probability": 0.35
+            },
+            {
+                "label": "Sandalia",
+                "probability": 0.13
+            },
+            {
+                "label": "Vestido",
+                "probability": 0.03
+            }
+        ]
+    }
+]

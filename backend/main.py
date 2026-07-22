@@ -1,5 +1,5 @@
 """
-Punto de entrada de la aplicación FastAPI.
+Punto de entrada de FastAPI.
 """
 
 from fastapi import FastAPI
@@ -7,35 +7,35 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from backend.api import router
 
-# CREAR APLICACIÓN
 
 app = FastAPI(
-    title="Clasificación de Imágenes IA",
+    title="Fashion AI API",
     description="""
-API REST para entrenar y utilizar un modelo de clasificación
-de imágenes basado en Fashion MNIST.
+API REST para clasificar imágenes de prendas.
 
-Funciones principales:
+Funciones disponibles:
 
-- Entrenar el modelo CNN
-- Configurar parámetros
-- Consultar métricas
-- Clasificar nuevas imágenes
-- Consultar el estado del modelo
+- Clasificación de prendas
+- Detección aproximada de colores
+- Historial de clasificaciones
+- Estado del modelo
+- Entrenamiento y métricas administrativas
 """,
-    version="1.0.0"
+    version="2.0.0"
 )
 
-# CORS
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://127.0.0.1:5173"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"],
+    allow_headers=["*"]
 )
 
-# RUTAS
 
 app.include_router(router)
